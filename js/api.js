@@ -1,7 +1,7 @@
 var connection = Syncano({
-  apiKey: '97599485fe954c2240b7a0a9cef092300c85fef7',
+  apiKey: API_KEY,
   defaults: {
-    instanceName: 'spring-dream-1283'
+    instanceName: INSTANCE_NAME
   }
 });
 var query = { name: 'messages' };
