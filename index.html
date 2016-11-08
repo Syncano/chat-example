@@ -46,6 +46,7 @@
     messageContent.onkeypress = function(event) {
       if (event.charCode === 13) {
         sendMessage();
+        return false;
       }
     };
 
