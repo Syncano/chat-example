@@ -1,0 +1,80 @@
+<head>
+  <title>Syncano Messenger</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <link rel="stylesheet" href="stylesheets/index.css" type="text/css" />
+  <script src="https://cdn.jsdelivr.net/syncano/1.0.28/syncano.min.js"></script>
+  <script src="js/api.js"></script>
+  <script>
+  document.addEventListener('DOMContentLoaded', function() {
+    var messageContent = document.getElementById('messageContent');
+    var sendMessageButton = document.getElementById('sendMessageButton');
+    var messageList = document.getElementById('messageList');
+
+    // var messageListContainer = document.getElementById('messageListContainer');
+
+    function handleMessage(message) {
+      var messageEl = '<li class="message">'
+          + '<span class="username">' + message.payload.username + '</span>'
+          + '<span class="message-body">' + message.payload.text + '</span>'
+          + '</li>';
+      messageList.innerHTML += messageEl;
+      scrollToLastMessage();
+    }
+
+    function fetchHistory(response) {
+      var messages = response.objects.reverse();
+      messages.forEach(handleMessage);
+    }
+
+    function scrollToLastMessage() {
+      var lastMessage = messageList.lastElementChild;
+      lastMessage.scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function sendMessage() {
+      var text = messageContent.value;
+      if (text != '') {
+        api.chat.sendMessage(query, { text, username: 'test' })
+        .then(function(res) {
+          console.log(res);
+        });
+        messageContent.value = '';
+      }
+    }
+
+    sendMessageButton.addEventListener('click', sendMessage);
+    messageContent.onkeypress = function(event) {
+      if (event.charCode === 13) {
+        sendMessage();
+      }
+    };
+
+    api.chat.getMessageHistory(query)
+    .then(function(response) {
+      fetchHistory(response);
+    });
+
+    // Subscribe to messages coming in from the channel.
+    api.chat.poll(query, handleMessage);
+  });
+  </script>
+</head>
+<body>
+  <div id="chatPage">
+    <div>
+      <div id="header">
+        <img src="img/syncano_logo_white.svg" alt="Syncano Logo">
+      </div>
+      <div id="messageListContainer">
+        <ul id="messageList">
+        </ul>
+      </div>
+      <div id="footer">
+          <div class="send-messages">
+            <div class="message-container"><textarea id="messageContent" rows="1" placeholder="Message..." tabindex="1"></textarea></div>
+            <div class="btn"><a href="#" id="sendMessageButton">Send Message</a></div>
+          </div>
+      </div>
+    </div>
+  </div>
+</body>
