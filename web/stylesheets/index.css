@@ -1,20 +1,28 @@
+html {
+  height: 100%;
+}
+
 body {
   font-family: true, Avenir, sans-serif;
-  margin: 0px;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+
 }
 
 #messageList {
   display: inline;
+  color: #0B0F15;
 }
 
 #messageListContainer {
-  margin-top: 5vh;
-  max-height: 85vh;
+  height: 82vh;
   overflow: scroll;
 
 }
 #header {
-  background-color: #244273;
+  background-color: #0B0F15;
   left: 0;
   right: 0;
   top: 0;
@@ -31,7 +39,7 @@ body {
 
 .username {
   font-weight: bold;
-  display: block
+  display: block;
 }
 
 .message {
@@ -45,7 +53,7 @@ body {
 }
 
 #footer {
-  padding: 0px 40px 10px 40px;
+  padding: 0px 40px 20px 40px;
 }
 
 .send-messages {
@@ -53,11 +61,13 @@ body {
 }
 #messageContent {
   width: 100%;
-  border: 3px solid #eeeeee;
+  border: 1px solid #0B0F15;
   font-family: Avenir, sans-serif;
   font-size: 1em;
+  font-weight: 100;
   resize: none;
   line-height: 2.5em;
+  padding-left: 10px;
 }
 
 .message-container {
@@ -70,22 +80,46 @@ body {
 
 .btn {
   display: flex;
-  margin: 1px 10px 2px 10px;
+  margin: 0px 10px 2px 10px;
   padding: 10px;
-  border-radius: 2px;
-  box-shadow: 0 1px 4px rgba(0, 0, 0, .6);
-  background-color: #FFCC01;
-  color: #1D2228;
-  transition: background-color .3s;
+  border-style: solid;
+  border-radius: 6px;
+  border-width: 2px;
+  border-color: #E51148;
+  transition: all .5s;
 }
 
 .btn:hover, .btn:focus {
-  background-color: #eabb00;
+  box-shadow: 0 1px 4px #b90f3b;
+  font-weight: 500;
 }
 
+@media (max-width: 600px) {
+  #sendMessageButton {
+    display: none;
+  }
+
+  .btn {
+    width: 27px;
+    font-size: 16px;
+  }
+}
+
+@media (min-width: 601px) {
+  #sendMessageButtonMobile {
+    display: none;
+  }
+}
 #sendMessageButton {
   margin: auto;
-  color: #1D2228;
+  color: #E51148;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+#sendMessageButtonMobile {
+  margin: auto;
+  color: #E51148;
   text-decoration: none;
   white-space: nowrap;
 }

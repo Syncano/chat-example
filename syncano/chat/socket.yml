@@ -1,0 +1,15 @@
+name: chat
+version: 0.0.1
+description: |
+  Realtime Chat Socket. It exposes two endpoints:
+  - send_message
+  - listen
+endpoints:
+  send_message:
+    file: scripts/send_message.js
+  realtime:
+    channel: realtime.{token}
+hosting:
+  staging:
+    src: ../web
+    cname: null

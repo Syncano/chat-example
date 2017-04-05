@@ -1,0 +1,71 @@
+<head>
+  <title>Syncano Messenger</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <link rel="stylesheet" href="stylesheets/index.css" type="text/css" />
+  <script src="./js/syncano-client.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      var s = new SyncanoClient('meadow-summer-5566');
+      var username = 'User ' + (Date.now()).toString().slice(-3);
+      var messageContent = document.getElementById('messageContent');
+      var sendMessageButton = document.getElementById('sendMessageButton');
+      var messageList = document.getElementById('messageList');
+
+      function handleMessage(message) {
+        var messageEl = '<li class="message">'
+            + '<span class="username">' + message.payload.username + '</span>'
+            + '<span class="message-body">' + message.payload.text + '</span>'
+            + '</li>';
+        messageList.innerHTML += messageEl;
+        scrollToLastMessage();
+      }
+
+      function scrollToLastMessage() {
+        var lastMessage = messageList.lastElementChild;
+        lastMessage.scrollIntoView({ behavior: 'smooth' });
+      }
+
+      function sendMessage(username) {
+        var text = messageContent.value;
+        if (text != '') {
+          s.post('chat/send_message', { text, username, room: 'chat', token: 'token' });
+          messageContent.value = '';
+        }
+      }
+
+      sendMessageButton.addEventListener('click', sendMessage);
+      messageContent.onkeypress = function(event) {
+        if (event.charCode === 13) {
+          sendMessage(username);
+          return false;
+        }
+      };
+
+      s.subscribe('chat/realtime', { token: 'token' }, message => {
+        handleMessage(message);
+      });
+    });
+  </script>
+</head>
+<body>
+  <div id="chatPage">
+    <div>
+      <div id="header">
+        <img src="img/syncano_logo_white.svg" alt="Syncano Logo">
+      </div>
+      <div id="messageListContainer">
+        <ul id="messageList">
+        </ul>
+      </div>
+      <div id="footer">
+          <div class="send-messages">
+            <div class="message-container"><textarea id="messageContent" rows="1" placeholder="Message..." tabindex="1"></textarea></div>
+            <div class="btn">
+              <a href="#" id="sendMessageButton">Send Message</a>
+              <a href="#" id="sendMessageButtonMobile">&#9166;</a>
+            </div>
+          </div>
+      </div>
+    </div>
+  </div>
+</body>
