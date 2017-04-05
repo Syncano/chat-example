@@ -28,7 +28,7 @@
       function sendMessage(username) {
         var text = messageContent.value;
         if (text != '') {
-          s.post('chat/send_message', { text, username, room: 'chat', token: 'token' });
+          s.post('chat/send_message', { text, username, token: 'token' });
           messageContent.value = '';
         }
       }

@@ -1,6 +1,6 @@
 import { channel, response } from 'syncano-server';
 
-const { username, text, room, token } = ARGS;
+const { username, text, token } = ARGS;
 
 channel.publish(`realtime.${token}`, { text, username })
   .then(res => response(JSON.stringify(res), 200, 'application/json'))
