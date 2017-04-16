@@ -5,7 +5,7 @@
   <script src="./js/syncano-client.min.js"></script>
   <script>
     document.addEventListener('DOMContentLoaded', function() {
-      var s = new SyncanoClient('meadow-summer-5566');
+      var s = new SyncanoClient('green-haze-8917');
       var username = 'User ' + (Date.now()).toString().slice(-3);
       var messageContent = document.getElementById('messageContent');
       var sendMessageButton = document.getElementById('sendMessageButton');
@@ -33,7 +33,9 @@
         }
       }
 
-      sendMessageButton.addEventListener('click', sendMessage);
+      sendMessageButton.addEventListener('click', function(){sendMessage(username)}, false);
+      sendMessageButtonMobile.addEventListener('click', function(){sendMessage(username)}, false);
+
       messageContent.onkeypress = function(event) {
         if (event.charCode === 13) {
           sendMessage(username);
