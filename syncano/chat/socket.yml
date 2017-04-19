@@ -39,7 +39,3 @@ endpoints:
     description: |
       This is the endpoint your users will subscribe to in order to poll for incoming messages.
       Based on the examples above a user would subscribe to realtime.this_would_work channel.
-hosting:
-  staging:
-    src: ../web
-    cname: null
