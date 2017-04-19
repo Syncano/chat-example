@@ -3,8 +3,9 @@ version: 0.0.2
 keywords:
   - chat
   - realtime
-description: |
-  Realtime Chat Socket. Showcases a basic functionality of communication through the Channels.
+description: >
+  Realtime Chat Socket. Showcases a basic functionality of communication through
+  the Channels.
 endpoints:
   send_message:
     description: Publish a message to a Channel
@@ -17,16 +18,17 @@ endpoints:
       text:
         type: string
         description: Content of the message.
-        example: Damn, I'm looking good.
+        example: 'Damn, I''m looking good.'
       token:
         type: string
-        description: Arbitrary part of the channel name. Should only contain url friendly characters.
+        description: >-
+          Arbitrary part of the channel name. Should only contain url friendly
+          characters.
         example: this_would_work
     response:
       mimetype: application/json
     examples:
-      -
-        exit_code: 200
+      - exit_code: 200
         description: Successful message publish
         example: |
           {
@@ -35,11 +37,10 @@ endpoints:
             "token": "this_would_work"
           }
   realtime:
-    channel: realtime.{token}
-    description: |
-      This is the endpoint your users will subscribe to in order to poll for incoming messages.
-      Based on the examples above a user would subscribe to realtime.this_would_work channel.
-hosting:
-  staging:
-    src: ../web
-    cname: null
+    channel: 'realtime.{token}'
+    description: >
+      This is the endpoint your users will subscribe to in order to poll for
+      incoming messages.
+
+      Based on the examples above a user would subscribe to
+      realtime.this_would_work channel.
