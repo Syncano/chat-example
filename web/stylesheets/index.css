@@ -8,6 +8,7 @@ body {
   bottom: 0;
   left: 0;
   right: 0;
+  top: 5vh;
 
 }
 
@@ -17,10 +18,10 @@ body {
 }
 
 #messageListContainer {
-  height: 82vh;
+  height: 80vh;
   overflow: scroll;
-
 }
+
 #header {
   background-color: #0B0F15;
   left: 0;
